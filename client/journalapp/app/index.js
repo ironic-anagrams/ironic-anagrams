@@ -1,6 +1,3 @@
-
-// app/index.js
-
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -21,50 +18,48 @@ import SettingsTab from './SettingsTab';
 // Refactored require to use import, for consistency
 import EntryList from './EntryList';
 
+// var STORAGE_KEY = '';
+
 export default class Journalapp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'EntriesTab',
+      page: 'EntriesTab'
     };
   }
 
-renderTab() {
-  if (this.state.page === "EntriesTab") return <EntriesTab/>;
-  if (this.state.page === "FriendsTab") return <FriendsTab/>;
-  if (this.state.page === "SettingsTab") return <SettingsTab/>;
-  if (this.state.page === "SignupTab") return <SignupTab/>;
-  if (this.state.page === "LoginTab") return <LoginTab/>;
-}
+  renderTab() {
+    if (this.state.page === "EntriesTab") return <EntriesTab />;
+    if (this.state.page === "FriendsTab") return <FriendsTab/>;
+    if (this.state.page === "SettingsTab") return <SettingsTab/>;
+    if (this.state.page === "SignupTab") return <SignupTab/>;
+    if (this.state.page === "LoginTab") return <LoginTab/>;
+  }
 
+  render() {
+    const { page } = this.state;
 
+      return (
 
-render() {
- const { page } = this.state;
+        <View style={styles.container}>
+        <Text>{page}</Text>
 
-   return (
+        {this.renderTab()}
 
-       <View style={styles.container}>
-       <Text>{page}</Text>
+          <Tabs
+            selected={page}
+            style={styles.tabbar}
+            selectedStyle={{color:'red'}} onSelect={el=>this.setState({page:el.props.name})}>
+              <Text name="EntriesTab">Entries</Text>
+              <Text name="FriendsTab">Friends</Text>
+              <Text name="SettingsTab">Settings</Text>
+              <Text name="SignupTab">Sign Up</Text>
+              <Text name="LoginTab">Log In</Text>
+          </Tabs>
 
-       {this.renderTab()}
-
-         <Tabs
-           selected={page}
-           style={styles.tabbar}
-           selectedStyle={{color:'red'}} onSelect={el=>this.setState({page:el.props.name})}
-         >
-             <Text name="EntriesTab">Entries</Text>
-             <Text name="FriendsTab">Friends</Text>
-             <Text name="SettingsTab">Settings</Text>
-             <Text name="SignupTab">Sign Up</Text>
-             <Text name="LoginTab">Log In</Text>
-         </Tabs>
-
-       </View>
-
-   )
- }
+        </View>
+      )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -86,5 +81,4 @@ const styles = StyleSheet.create({
 
   }
 });
-
 

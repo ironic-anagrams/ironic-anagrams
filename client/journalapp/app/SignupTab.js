@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
 // Refactored to use import instead of ES2015 require, for consistency 
@@ -22,22 +23,32 @@ export default class SignupTab extends Component {
     };
   }
 
-  submitUser() {
+  submitUser() {  
     var newUser = JSON.stringify({
       username: this.state.username,
       fullname: this.state.fullname,
       password: this.state.password
     });
 
-    console.warn("newUser is: ", newUser);
-
-    fetch('http://localhost:3000/api/users', {
+    fetch('http://localhost:3000/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: newUser
+    })
+    .then( resp => { resp.json()
+      .then( json => {
+        try {
+          AsyncStorage.setItem('@MySuperStore:token', json.token, (err) => { 
+            if ( err ){ console.warn(err); } 
+          });
+        } catch (error) {
+          console.log('AsyncStorage error: ' + error.message);
+        }
+      });
     });
+
   }
 
   updateFullname(val) {
@@ -55,9 +66,6 @@ export default class SignupTab extends Component {
     this.setState(newProp);
   }
 
-  getState(){
-    this.state;
-  }
   render() {
 
     return (
@@ -67,7 +75,6 @@ export default class SignupTab extends Component {
           updateFullname={ this.updateFullname.bind(this) }
           updateUsername={ this.updateUsername.bind(this) }
           updatePassword={ this.updatePassword.bind(this) }
-          getState={ this.getState.bind(this) }
           />
       </View>
 

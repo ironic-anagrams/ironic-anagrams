@@ -7,7 +7,8 @@ import {
   Text,
   TextInput,
   ListView,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
 // Refactored to use import instead of ES2015 require, for consistency 
@@ -34,38 +35,57 @@ export default class EntriesTab extends Component {
     // }
 
     getEntries(){
-      console.log('does my get entires get called?')
-      fetch('http://zpdubmisbk.localtunnel.me/api/entries')
-        .then((result) => {
-          console.log("get request", result);
-          this.setState({
-            entries:ds.cloneWithRows(result)
+
+      AsyncStorage.getItem('@MySuperStore:key', (err, token) => {
+
+        console.log("*** FIRING GET ENTRIES ");
+        fetch('http://localhost:3000/api/entries', {
+          method: 'GET',
+          // params: { 'userId': 30},
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token
+          }
+        })    
+        .then( resp => { resp.json()
+          .then( json => {
+            console.log("~~~~~***** get request", json);
+            ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+            this.setState({
+              entries: ds.cloneWithRows(json)
+            })
           })
-        })
-        .catch((error) => {
-          console.warn("fetch error on getrequest:", error)
-        })
+          .catch((error) => {
+            console.warn("fetch error on getrequest:", error)
+          });
+        });
+      });
+    
     }
 
     handleMessageSubmit() {
-      var message = {text:this.state.text};
-      console.log("Does this get ran?",this.state.text);
 
-      fetch('http://zpdubmisbk.localtunnel.me/api/entries', {
-         method: 'POST',
-         headers: {
-           //'Accept': 'application/json',
+      AsyncStorage.getItem('@MySuperStore:token', (err, token) => {
+        var message = {text:this.state.text};
+
+        fetch('http://localhost:3000/api/entries', {
+          method: 'POST',
+          headers: {
+             //'Accept': 'application/json',
            'Content-Type': 'application/json',
-         },
-         body: JSON.stringify(message)
-       })
-        .then((response) => {
-          console.log(response)
-          this.getEntries();
+           'x-access-token': token
+          },
+          body: JSON.stringify(message)
         })
-         .catch((error) => {
-          console.warn("fetch error:", error)
-        })
+          .then((response) => {
+            console.log(response)
+            this.getEntries();
+          })
+            .catch((error) => {
+              console.warn("fetch error:", error)
+            });
+      });
+
     }
 
 
