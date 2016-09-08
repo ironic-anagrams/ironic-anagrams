@@ -56,8 +56,7 @@ export default class FriendScene extends Component {
       <View>
         <Text>FriendPage</Text>
         <Text>Friends EntryList</Text>
-        <EntryList entries={this.state.entries} />
-        <Text onPress={ () => { this.props.navigator.pop() } }>Go Back</Text>
+        <EntryList entries={ this.state.entries } />
       </View>
     )
   }

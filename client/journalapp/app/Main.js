@@ -29,27 +29,26 @@ const styles = StyleSheet.create({
   textinput: {
     height: 40,
     borderColor: 'gray',
-    borderWidth: 1
+    borderWidth: 1, 
   }, 
+  faintText: {
+    color: 'rgba(100,100,100,.6)'
+  },
   topBar: {
     width: Dimensions.get('window').width,
+    height: 60,
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(100,100,100,.6)',
+    borderBottomColor: 'rgba(175,175,175,.6)'
   }, 
   topBarView: {
-    margin: 3, 
+    marginTop: 3, 
   },
   tabbar: {
     backgroundColor:'white',
     height: 49,
     borderTopColor: 'gray',
     borderTopWidth: 0.5
-  },
-  textinput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1
   },
   tabbarimage: {
     height: 35,
@@ -121,7 +120,6 @@ export default class Main extends Component {
         body: JSON.stringify(message)
       })
         .then((response) => {
-          console.log("NOW, GET ENTRIES AND POP")
           this.getEntries();
           navigator.pop();
         })
@@ -130,7 +128,6 @@ export default class Main extends Component {
           });
     });
   }
-
 
   renderTab(navigator) {
     if (this.state.page === "EntriesTab") return <EntriesTab navigator={navigator} getEntries={ this.getEntries.bind(this) } entries={ this.state.entries }/>;
@@ -204,6 +201,12 @@ export default class Main extends Component {
                       </Text>
                     </View>
                   )
+                } else if ( route.title === 'MessageScene') {
+                  return (
+                    <View style={ styles.topBarView }>
+                      <Text onPress={ () => { navigator.pop() } }>GO BACK</Text>
+                    </View>
+                  )
                 }
               },
 
@@ -217,10 +220,10 @@ export default class Main extends Component {
                     </View>
                   )
                 } 
-                if ( this.state.page === 'EntriesTab' && route.title === 'MessageScene' ) {
+                if ( route.title === 'MessageScene' ) {
                   return (
                     <View style={ styles.topBarView }>
-                      <Text onPress={(() => { this.postEntry(navigator); }).bind(this) } >
+                      <Text style={ styles.faintText } onPress={(() => { this.postEntry(navigator); }).bind(this) } >
                         Publish
                       </Text>
                     </View>
@@ -228,9 +231,13 @@ export default class Main extends Component {
                 }
               },
 
-              Title: (route, navigator, index, navState) =>
-
-                { return (<Text>{this.state.page}</Text>); }
+              Title: (route, navigator, index, navState) =>{
+                if ( route.title === 'MessageScene') {
+                  return (<Text style={ styles.faintText }>{ 100 - this.state.newEntry.length }</Text>)
+                } else { 
+                  return (<Text>{ this.state.page }</Text>); 
+                }
+              }  
             }
           }
           style={ styles.topBar } />

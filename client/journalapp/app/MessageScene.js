@@ -15,9 +15,12 @@ import Button from 'react-native-button';
 
 const styles = StyleSheet.create({
   textinput: {
-    height: 40
+    height: 40, 
+    maxWidth: Dimensions.get('window').width * .75 
   },
   container: {
+    flex: 1,
+    flexDirection: 'column',
     width: Dimensions.get('window').width * .9,
     paddingTop: 70
   },
@@ -34,13 +37,19 @@ export default class FriendScene extends Component {
     this.props = props;
   };
 
+  componentDidMount(){
+    this.props.updateEntry('');
+  }
+
   render() {
     return (
       <View style={ styles.container }>
-        <Button onPress={ ()=>{ this.props.navigator.pop() } }> Back </Button>
         <TextInput
+            keyboardType='default'
+            keyboardAppearance='light' 
             placeholder= 'What did you do today?'
-            style={[styles.textinput, styles.fadedText]}
+            style={ [styles.textinput, styles.fadedText] }
+            maxLength={ 100 } 
             onChangeText={ (text) => this.props.updateEntry(text) } />
       </View>
     )
