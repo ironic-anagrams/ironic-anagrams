@@ -8,7 +8,7 @@ import {
   Navigator,
   AsyncStorage,
   Dimensions,
-  Image, 
+  Image,
   TouchableHighlight
 } from 'react-native';
 
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
   textinput: {
     height: 40,
     borderColor: 'gray',
-    borderWidth: 1, 
-  }, 
+    borderWidth: 1,
+  },
   faintText: {
     color: 'rgba(100,100,100,.6)'
   },
@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(175,175,175,.6)', 
-  }, 
+    borderBottomColor: 'rgba(175,175,175,.6)',
+  },
   topBarView: {
-    marginTop: 3, 
+    marginTop: 3,
     borderBottomColor: 'rgba(100,100,100,.6)',
   },
   tabbar: {
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     opacity: 0.4
   },
   tabbarimage: {
-    height: 35,
-    width:35,
+    height: 30,
+    width:37.5,
     marginTop:6.5,
     alignSelf:'center'
   },
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
    fontWeight:'700',
    marginBottom:6.5,
    color:"#424242"
-  }, 
+  },
   arrow: {
     alignSelf:'flex-end',
     flexDirection: 'column',
@@ -83,17 +83,17 @@ const styles = StyleSheet.create({
     alignSelf:'flex-end',
     flexDirection: 'column',
     color:"#c7c7cc",
-  }, 
+  },
   title: {
     marginTop: 7,
     height: 53,
-    fontSize: 20, 
-  }, 
+    fontSize: 20,
+  },
   rightArrow: {
     marginTop: 10,
     marginRight: 10,
     height: 53,
-    fontSize: 14, 
+    fontSize: 14,
   }
 });
 
@@ -106,7 +106,7 @@ export default class Main extends Component {
     this.state = {
       page: 'EntriesTab',
       entries: ds.cloneWithRows([]),
-      newEntry: '', 
+      newEntry: '',
       friendName: ''
     };
   }
@@ -259,7 +259,7 @@ export default class Main extends Component {
                       </Text>
                     </View>
                   )
-                } 
+                }
                 if ( route.title === 'MessageScene' ) {
                   return (
                     <View style={ [styles.topBarView, styles.rightArrow] }>
@@ -276,27 +276,27 @@ export default class Main extends Component {
                 if ( route.title === 'MessageScene') {
                   return (<Text style = { [styles.faintText, styles.title] }>{ 100 - this.state.newEntry.length }</Text>)
                 } else if ( this.state.page === 'EntriesTab' ) {
-                  return (<Text style={ styles.title }>{ 'My Story' }</Text>); 
+                  return (<Text style={ styles.title }>{ 'My Story' }</Text>);
                 }
 
                 // Title views for the friends routes.
                 if ( route.title === 'SearchFriends') {
-                  return (<Text style={ styles.title }>{ 'Add Friends' }</Text>); 
+                  return (<Text style={ styles.title }>{ 'Add Friends' }</Text>);
                 } else if ( route.title === 'FriendPage' ) {
                   return (<Text style={ styles.title }>{ this.state.friendName } </Text>);
                 } else if ( this.state.page === 'FriendsTab' ) {
-                  return (<Text style={ styles.title }>{ 'Friends' }</Text>); 
+                  return (<Text style={ styles.title }>{ 'Friends' }</Text>);
                 }
 
                 // Title views for the settings route.
                 if (this.state.page === 'SettingsTab') {
-                  return (<Text style={ styles.title }>{ 'Settings' }</Text>); 
+                  return (<Text style={ styles.title }>{ 'Settings' }</Text>);
                 }
 
-                else { 
-                  return (<Text style={ styles.title }>{ 'ERROR: We haven\'t covered this route yet.' }</Text>); 
+                else {
+                  return (<Text style={ styles.title }>{ 'ERROR: We haven\'t covered this route yet.' }</Text>);
                 }
-              }  
+              }
             }
           }
           style={ styles.topBar } />
