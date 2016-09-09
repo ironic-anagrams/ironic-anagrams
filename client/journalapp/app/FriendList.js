@@ -4,19 +4,28 @@ import {
   Text,
   TextInput,
   ListView,
-  View
+  View,
+
 } from 'react-native';
 
 import Friend from './Friend';
 
 var FriendList = (props) => {
-  
+
   return (
 
     <View>
     <Text style={ styles.subHeader } >Your Friends</Text>
       { props.friendList.map( (friend) => {
-        return ( <Friend username={ friend.username } fullname={ friend.fullname } id={ friend.id } navigator={ props.navigator } updateFriend={ props.updateFriend }/> );
+        return (
+          <Friend
+
+          username={ friend.username }
+          fullname={ friend.fullname }
+          id={ friend.id }
+          navigator={ props.navigator }
+          updateFriend={ props.updateFriend }/>
+          );
       }) }
 
     </View>
@@ -29,7 +38,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color:"#424242",
     marginLeft:12,
-    marginBottom:12
+    marginBottom:12,
+    marginTop:17
   }
 });
 

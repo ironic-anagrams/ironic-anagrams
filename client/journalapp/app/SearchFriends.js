@@ -6,7 +6,8 @@ import {
   View,
   AsyncStorage,
   Navigator,
-  ListView
+  ListView,
+  Dimensions
 } from 'react-native';
 
 import SearchResultsList from './SearchResultsList'
@@ -89,21 +90,23 @@ export default class SearchFriends extends Component {
 }
 
 const styles = StyleSheet.create({
+
   container: {
+    width: Dimensions.get('window').width,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  tabbar: {
-    backgroundColor:'white',
-    height: 64,
-    borderTopColor: 'red',
-    borderTopWidth: 2
+    flexDirection:'column',
+    justifyContent:'flex-start',
+    marginTop:60,
+    backgroundColor: '#f5f6f6'
   },
   textinput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1
+    height: 36,
+    paddingLeft:12,
+    borderColor: 'grey',
+    borderBottomWidth: 1,
+    fontSize: 14,
+    fontWeight: '400',
+    color:"#666666",
   },
 
 });

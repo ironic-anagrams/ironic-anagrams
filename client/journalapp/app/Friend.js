@@ -5,6 +5,7 @@ import {
   TextInput,
   ListView,
   View,
+  TouchableHighlight
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -12,20 +13,18 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 var Friend = (props) => {
 
   return (
+    <TouchableHighlight onPress={()=>{ props.navigator.push({title: 'FriendPage', friendId: props.id });
+                                                               props.updateFriend(props.fullname) }}>
+      <View style={styles.container}>
+        <View style={ styles.row }>
+          <Text style={ styles.bodyText } >
+          { props.fullname }
+          </Text>
 
-    <View style={styles.container}>
-      <View style={ styles.row } >
-
-
-        <Text style={ styles.bodyText } onPress={()=>{ props.navigator.push({title: 'FriendPage', friendId: props.id });
-                                                       props.updateFriend(props.fullname);}}>
-        { props.fullname }
-        </Text>
-
-        <Icon style= {styles.arrow} name="navigate-next" ></Icon>
-
+          <Icon style= {styles.arrow} name="navigate-next" ></Icon>
+        </View>
       </View>
-    </View>
+    </TouchableHighlight>
 
   )
 };

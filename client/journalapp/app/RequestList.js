@@ -17,7 +17,7 @@ var RequestList = (props) => {
       <View>
       <Text style={ styles.subHeader } >Pending Friend Requests</Text>
         { props.requestList.map( (request) => {
-          return ( <Request fullname={ request.user.fullname } requestId={request.id} acceptFriend={props.acceptFriend} navigator={props.navigator}/> );
+          return ( <Request fullname={ request.user.fullname } username={ request.user.username } requestId={request.id} acceptFriend={props.acceptFriend} navigator={props.navigator}/> );
         }) }
 
       </View>
@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color:"#424242",
     marginLeft:12,
-    marginBottom:12
+    marginBottom:12,
+    marginTop:18
   }
 });
 
