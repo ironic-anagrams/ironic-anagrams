@@ -26,7 +26,7 @@ export default class SearchFriends extends Component {
   };
 
   findMatching(query) {
-    console.log(query, typeof query, 'this ma query')
+    console.log(query, typeof query, 'this ma query');
     var url = 'http://localhost:3000/api/users' + "/?username=" + query;
     AsyncStorage.getItem('@MySuperStore:token', (err, token) => {
       fetch(url , {
