@@ -86,6 +86,7 @@ export default class LoginTab extends Component {
 
           <Text> Enter your password: </Text>
           <TextInput 
+            secureTextEntry={ true }
             onChangeText= { (text) => this.updatePassword( {text} ) }
             style= { inputStyle } 
             name="password" 

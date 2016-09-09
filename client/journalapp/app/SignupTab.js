@@ -95,6 +95,7 @@ export default class SignupTab extends Component {
 
           <Text> Enter a password: </Text>
           <TextInput 
+            secureTextEntry={ true }
             onChangeText= { (text) => this.updatePassword({text}) }
             style= { inputStyle } 
             name="password" 

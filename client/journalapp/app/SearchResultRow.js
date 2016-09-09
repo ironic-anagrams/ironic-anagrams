@@ -12,7 +12,8 @@ import {
 var SearchResultRow = (props) => {
 
   return (
-    <TouchableHighlight onPress={props.sendreq(props.id)}>
+    <TouchableHighlight onPress={() => { props.sendreq(props.id);
+                                         props.navigator.pop();}}>
       <View style={styles.container}>
        <View style={ styles.row }>
         <Text style={styles.bodyText}>
