@@ -59,15 +59,15 @@ const styles = StyleSheet.create({
     opacity: 0.4
   },
   tabbarimage: {
-    height: 35,
-    width:35,
+    height: 30,
+    width:30,
     marginTop:6.5,
     alignSelf:'center'
   },
   tabbartext: {
    fontSize:10,
    fontWeight:'700',
-   marginBottom:6.5,
+   marginBottom:12,
    color:"#424242"
   }, 
   arrow: {
