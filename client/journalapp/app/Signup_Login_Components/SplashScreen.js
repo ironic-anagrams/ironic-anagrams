@@ -13,15 +13,15 @@ import {
 } from 'react-native';
 
 import styles from '../styles/AuthGeneralStyles';
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 var Splash = () => {
 
   return (
     <View style={styles.viewContainer}>
       <View style={styles.splashcontainer}>
-        <Image style={styles.img} source={require('../images/App_Icon.png')}/>
-        <Text style={styles.title}> Welcome To Your Story </Text>
-        <Text style={styles.subtitle}> A simple journal app designed to help you remember what you did each day and keep in touch with close friends. </Text>
+        <Text style={styles.title}> welcome to caster </Text>
+        <Text style={styles.subtitle}> a messaging app that let's you broadcast important text messages to your @network and @friends  </Text>
       </View>
     </View>
   )

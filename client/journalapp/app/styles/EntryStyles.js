@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderColor: '#cccccc',
     paddingTop: 12,
-    paddingBottom:12
+    paddingBottom: 12,
+    backgroundColor: '#f6f6f6'
   },
   row: {
     flex: 1,
@@ -21,11 +22,43 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 0,
   },
+  rowFooter: {
+    flex: 1,
+    paddingRight: 5,
+    justifyContent: 'flex-end',
+    flexDirection: 'row'
+  },
+  rowBack: {
+    backgroundColor: 'white'
+  },
+  filler: {
+  },
+  leftGroup: {
+    justifyContent: 'flex-start'
+  },
+  username: {
+    fontSize: 12,
+    color: '#999999',
+    fontWeight: '700',
+    marginRight: 50
+  },
   date: {
-    justifyContent: 'flex-start',
     fontSize: 11,
     color: '#999999',
     fontWeight: '500'
+  },
+  tag: {
+    marginRight: 5,
+    shadowColor: '#000000',
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
+    color: '#007fff',
+    fontSize: 10,
+    fontWeight: 'bold'
   },
   location: {
     justifyContent: 'flex-end',

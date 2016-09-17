@@ -3,6 +3,7 @@ import {
   StyleSheet,
   TextInput,
   Text,
+  Alert,
   View,
   Switch,
   Slider,
@@ -26,7 +27,8 @@ export default class SignupTab extends Component {
     this.state = {
       username: '',
       fullname: '',
-      password: ''
+      password: '',
+      phoneNumber: ''
     };
   }
 
@@ -34,26 +36,34 @@ export default class SignupTab extends Component {
     var newUser = JSON.stringify({
       username: this.state.username,
       fullname: this.state.fullname,
-      password: this.state.password
+      password: this.state.password,
+      phoneNumber: this.state.phonenumber
     });
+    console.log(newUser);
+    if (this.formStatus()) {
 
-    if (this.formStatus()){
-      fetch('http://localhost:3000/api/signup', {
+      fetch(`${this.props.url}api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: newUser
       })
-      .then( resp => { resp.json()
+      .then( resp => { 
+        resp.json()
         .then( json => {
-          try {
-            AsyncStorage.multiSet([['@MySuperStore:token', json.token], ['@MySuperStore:username', this.state.username]], (err) => {
-              if ( err ){ console.warn(err); }
-              this.props.updateStatus(true);
-            });
-          } catch (error) {
-            console.log('AsyncStorage error: ' + error.message);
+          console.log(json, '!');
+            if (json.token) {
+              try {
+                AsyncStorage.multiSet([['@MySuperStore:token', json.token], ['@MySuperStore:username', this.state.username]], (err) => {
+                  if ( err ) { console.warn(err); }
+                  this.props.updateStatus(true);
+                });
+              } catch (error) {
+                console.log('AsyncStorage error: ' + error.message);
+              }
+          } else {
+            Alert.alert('Email in use already');
           }
         });
       });
@@ -61,10 +71,12 @@ export default class SignupTab extends Component {
   }
 
   formStatus() {
-    if (this.state.username.length !==0 && this.state.fullname.length !==0 && this.state.password.length !==0 ){
-     return true
+    var emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+    var phoneRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+    if (emailRegex.test(this.state.username) && this.state.fullname.length !== 0 && this.state.password.length !== 0  && phoneRegex.test(this.state.phonenumber)) {
+      return true;
     } else {
-    return false
+      return false;
     }
   }
 
@@ -83,6 +95,11 @@ export default class SignupTab extends Component {
     this.setState(newProp);
   }
 
+  updatePhone(val) {
+    var newProp = {'phonenumber': val.text};
+    this.setState(newProp);
+  }
+
   render() {
 
     return (
@@ -90,7 +107,7 @@ export default class SignupTab extends Component {
         <Form style={styles.formContainer} ref={'signupForm'}>
 
           <View style={styles.fieldContainer}>
-          <Text style={styles.subHeader} > Full name </Text>
+          <Text style={styles.subHeader} > Username </Text>
           <TextInput
             onChangeText= { (text) => this.updateFullname({text}) }
             style= { styles.container }
@@ -116,6 +133,15 @@ export default class SignupTab extends Component {
             name="password"
             type="TextInput"/>
           </View>
+          <View style={styles.fieldContainer}>
+          <Text style={styles.subHeader}> Phone Number </Text>
+          <TextInput
+            secureTextEntry={ true }
+            onChangeText= { (text) => this.updatePhone({text}) }
+            style= { styles.container }
+            name="phonenumber"
+            type="TextInput"/>
+          </View>
         </Form>
 
         <Button
@@ -129,4 +155,3 @@ export default class SignupTab extends Component {
     );
   }
 }
-

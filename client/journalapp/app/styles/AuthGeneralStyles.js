@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width*.7,
     paddingTop: 6,
     paddingBottom:6,
-    marginTop:52,
+    marginTop:100,
     marginBottom: 52,
     flex: 1,
     flexDirection:'column',
@@ -24,9 +24,10 @@ const styles = StyleSheet.create({
   subHeader: {
     fontSize: 12,
     fontWeight: '700',
-    color:"#424242",
+    color:"#fdf6e3",
     marginLeft:12,
-    marginBottom:4.5
+    marginBottom:4.5,
+    backgroundColor:'transparent'
   },
   container: {
     backgroundColor: '#fafafa',
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   },
   button:{
     height:40,
-    backgroundColor:"#424242",
+    backgroundColor:"#48b9c7",
     marginLeft:12,
     marginRight:12,
     marginTop:12,
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
   },
   disabledbutton:{
     height:40,
-    backgroundColor:"#424242",
+    backgroundColor:"#58b9c7",
     marginLeft:12,
     marginRight:12,
     marginTop:12,
@@ -84,8 +85,11 @@ const styles = StyleSheet.create({
     marginTop: 18,
     height: 32,
     fontSize: 21,
-    fontWeight: '700',
-    alignSelf:'center'
+    fontWeight: '300',
+    alignSelf:'center',
+    fontFamily: 'menlo',
+    backgroundColor: 'transparent',
+    color: '#fdf6e3'
   },
   subtitle: {
     height: 150,
@@ -96,7 +100,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop:6,
     paddingLeft:3,
-    paddingRight:3
+    paddingRight:3,
+    fontFamily: 'menlo',
+    backgroundColor: 'transparent',
+    color: '#fdf6e3'   
   }
 });
 

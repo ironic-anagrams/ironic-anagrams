@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingTop: 56,
     paddingRight: 12,
     paddingLeft: 12,
-    backgroundColor: '#f5f6f6',
+    backgroundColor: '#fdf6e3',
     width: Dimensions.get('window').width,
   },
   subHeader: {

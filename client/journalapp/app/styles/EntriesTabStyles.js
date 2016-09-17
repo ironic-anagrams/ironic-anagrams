@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   }, 
   headerButton: {
-    width: Dimensions.get('window').width * .75,
+    width: Dimensions.get('window').width //* .75,
   },
   buttonText: {
     color: '#0078f0',

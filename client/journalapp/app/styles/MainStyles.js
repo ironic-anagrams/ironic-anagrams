@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f6f6',
+    backgroundColor: '#fdf6e3',
   },
   textinput: {
     height: 40,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     fontSize: 22
   },
   faintText: {
-    color: 'rgba(100,100,100,.6)'
+    color: '#fdf6e3'
   },
   largerText: {
     marginTop: -2,
@@ -26,9 +26,14 @@ const styles = StyleSheet.create({
   topBar: {
     width: Dimensions.get('window').width,
     height: 60,
-    backgroundColor: '#f5f6f6',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(175,175,175,.6)',
+    backgroundColor: '#48b9c7',
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    }
   },
   topBarView: {
     marginTop: 3,
@@ -60,21 +65,22 @@ const styles = StyleSheet.create({
     alignSelf:'flex-end',
     flexDirection: 'column',
     fontSize:30,
-    color:"#c7c7cc",
+    color: '#fdf6e3',
     marginLeft: 12
   },
   image: {
     height: 30,
     width: 30,
     alignSelf:'flex-end',
-    flexDirection: 'column',
-    color:"#c7c7cc",
+    flexDirection: 'column'
   },
   title: {
     marginTop: 5,
     height: 53,
     fontSize: 17,
-    fontWeight: '600'
+    fontWeight: '300',
+    color: '#fdf6e3',
+    fontFamily: 'menlo'
   },
   titleCounter: {
     marginTop: 9,
@@ -85,7 +91,39 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginRight: 10,
     height: 53,
-    fontSize: 14,
+    //fontSize: 14,
+  },
+  //Swiper
+  wrapper: {
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    //backgroundColor: '#9DD6EB',
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    //backgroundColor: '#97CAE5',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    //backgroundColor: '#92BBD9',
+  },
+  slide4: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    //backgroundColor: '#92BBD9',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
   }
 });
 

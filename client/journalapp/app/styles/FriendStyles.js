@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fafafa',
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   bodyText: {
     flexDirection: 'column',

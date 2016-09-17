@@ -13,9 +13,8 @@ import {
   Alert
 } from 'react-native';
 
-import Form from 'react-native-form'
+import Form from 'react-native-form';
 import Button from 'react-native-button';
-
 import styles from '../styles/AuthGeneralStyles';
 
 export default class LoginTab extends Component {
@@ -36,15 +35,17 @@ export default class LoginTab extends Component {
       password: this.state.password
     });
 
+
     if (this.formStatus()){
-      fetch('http://localhost:3000/api/signin', {
+      fetch(`${this.props.url}api/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: newUser
       })
-      .then( resp => { resp.json()
+      .then( resp => { 
+        resp.json()
         .then( json => {
           // Make sure there is no error in the login information. Detects if the username is not in the DB, or if the password is wrong.
           if ( json.error ) {
@@ -52,7 +53,7 @@ export default class LoginTab extends Component {
           } else {
             try {
               AsyncStorage.multiSet([['@MySuperStore:token', json.token], ['@MySuperStore:username', this.state.username]], (err) => {
-                if ( err ){ console.warn(err); }
+                if ( err ) { console.warn(err); }
                 this.props.updateStatus(true);
               });
             } catch (error) {
@@ -61,15 +62,15 @@ export default class LoginTab extends Component {
           }
         });
       })
-      .catch((error) => { console.log("ERROR: ", error)});
+      .catch((error) => { console.log('ERROR: ', error); });
     }
   }
 
   formStatus() {
-    if (this.state.username.length !==0 && this.state.password.length !==0 ){
-     return true
+    if (this.state.username.length !== 0 && this.state.password.length !== 0 ) {
+      return true;
     } else {
-     return false
+      return false;
     }
   }
 
@@ -83,7 +84,7 @@ export default class LoginTab extends Component {
     this.setState(newProp);
   }
 
-  getState(){
+  getState() {
     return this.state;
   }
 

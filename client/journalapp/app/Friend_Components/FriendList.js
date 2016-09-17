@@ -20,6 +20,7 @@ var FriendList = (props) => {
       { props.friendList.map( (friend) => {
         return (
           <Friend
+          key={ friend.id }
           username={ friend.username }
           fullname={ friend.fullname }
           id={ friend.id }

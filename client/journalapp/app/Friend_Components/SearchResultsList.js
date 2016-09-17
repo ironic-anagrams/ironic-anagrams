@@ -14,7 +14,7 @@ var SearchResultsList = (props) => {
 
     <View>
       { props.results.map( (friend) => {
-        return ( <SearchResultRow username={ friend.username } fullname={ friend.fullname } id={ friend.id } sendreq={props.sendreq} navigator={props.navigator}/> );
+        return ( <SearchResultRow key={ friend.id } username={ friend.username } fullname={ friend.fullname } id={ friend.id } sendreq={props.sendreq} navigator={props.navigator}/> );
       }) }
 
     </View>

@@ -9,7 +9,8 @@ import {
   ScrollView,
   AsyncStorage,
   Navigator,
-  Dimensions
+  Dimensions,
+  ListView
 } from 'react-native';
 
 import FriendList from './FriendList';
@@ -24,13 +25,16 @@ export default class FriendsTab extends Component {
 
     this.props = props;
 
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       friendList: [],
-      pendingRequests: []
+      pendingRequests: [],
+      allMessages: [],
+      entries: ds.cloneWithRows([])
     };
-  };
+  }
 
-  componentWillMount(){
+  componentWillMount() {
     this.getFriends();
     this.getFriendRequests();
   }
@@ -38,8 +42,10 @@ export default class FriendsTab extends Component {
   // This will happen when the component is mounted, and will show a list (via FriendsList) of 
   // friends (via Friend).
   getFriends(){
-    AsyncStorage.getItem('@MySuperStore:token', (err, token) => {
-      fetch('http://localhost:3000/api/friends', {
+    AsyncStorage.multiGet(['@MySuperStore:token', '@MySuperStore:url'], (err, store) => {
+      var token = store[0][1];
+      var url = store[1][1];
+      fetch(`${url}api/friends`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -49,8 +55,8 @@ export default class FriendsTab extends Component {
       .then( resp => { resp.json()
         .then( json => {
           if (json.name !== 'SequelizeDatabaseError') {
-            this.setState({ friendList: json })
-          };
+            this.setState({ friendList: json });
+          }
         })
         .catch((error) => {
           console.warn("error on json():", error)
@@ -59,15 +65,17 @@ export default class FriendsTab extends Component {
       .catch( error => {
         console.log("error on fetch()", error)
       });
-      ;
     });
   }
 
+
   // This will happen when the component is mounted, and will show a list (via RequestList) of 
   // requests (via Request).
-  getFriendRequests(){
-    AsyncStorage.getItem('@MySuperStore:token', (err, token) => {
-      fetch('http://localhost:3000/api/friendreq', {
+  getFriendRequests() {
+    AsyncStorage.multiGet(['@MySuperStore:token', '@MySuperStore:url'], (err, store) => {
+      var token = store[0][1];
+      var url = store[1][1];
+      fetch(`${url}api/friendreq`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -88,9 +96,11 @@ export default class FriendsTab extends Component {
 
   // Accepting a friend request occurs on the Request view.
   acceptFriendRequest(requestId){
-    AsyncStorage.getItem('@MySuperStore:token', (err, token) => {
-      var message = {requestId:requestId};
-      fetch('http://localhost:3000/api/friendreq', {
+    AsyncStorage.multiGet(['@MySuperStore:token', '@MySuperStore:url'], (err, store) => {
+      var token = store[0][1];
+      var url = store[1][1];
+      var message = { requestId: requestId };
+      fetch(`${url}api/friendreq`, {
         method: 'POST',
         headers: {
          'Content-Type': 'application/json',
@@ -109,10 +119,12 @@ export default class FriendsTab extends Component {
   }
 
   // Rejecting a friend request occurs on the Request view.  
-  rejectFriendRequest(requestId){
-    AsyncStorage.getItem('@MySuperStore:token', (err, token) => {
+  rejectFriendRequest(requestId) {
+    AsyncStorage.multiGet(['@MySuperStore:token', '@MySuperStore:url'], (err, store) => {
+      var token = store[0][1];
+      var url = store[1][1];
       var req = {requestId: requestId};
-      fetch('http://localhost:3000/api/friendreq', {
+      fetch(`${url}api/friendreq`, {
         method: 'DELETE',
         headers: {
          'Content-Type': 'application/json',
@@ -148,8 +160,3 @@ export default class FriendsTab extends Component {
     )
   }
 }
-
-
-
-
-

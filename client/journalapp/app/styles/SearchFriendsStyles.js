@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     justifyContent:'flex-start',
     marginTop:60,
-    backgroundColor: '#f5f6f6'
+    backgroundColor: '#fdf6e3'
   },
   textinput: {
     height: 36,

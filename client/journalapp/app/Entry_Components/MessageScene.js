@@ -22,29 +22,29 @@ export default class FriendScene extends Component {
     super(props);
     this.props = props;
     this.state = {
-      dynamicHeight: () => { return {height: Dimensions.get('window').height - 49 - 70}}
+      dynamicHeight: () => { return {height: Dimensions.get('window').height - 49 - 70}; }
     };
-  };
+  }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.updateEntry('');
   }
 
   // This shrinks the container to accommodate the keypad, when the user clicks the text input
   // to begin his/her entry. The footer is thus effectively pulled up the view. 
-  moveUpForKeyboardShow(){
+  moveUpForKeyboardShow() {
     setTimeout( ()=> {
       this.setState(
-        { dynamicHeight : () => { return { height: Dimensions.get('window').height * .45 }} }
+        { dynamicHeight: () => { return { height: Dimensions.get('window').height * .45 }; } }
       );
     }, 200); 
   }
 
   // When the user clicks out of the text input but remains on this view, this resets the container
   // back to its original size, effectively pushing the footer back down. 
-  moveDownForKeyboardHide(){
+  moveDownForKeyboardHide() {
     this.setState(
-      { dynamicHeight : () => { return {height: Dimensions.get('window').height - 49 - 70}} }
+      { dynamicHeight: () => { return {height: Dimensions.get('window').height - 49 - 70}; } }
     );
   }
 
@@ -58,15 +58,15 @@ export default class FriendScene extends Component {
             placeholder= 'What did you do today?'
             style={ [this.state.dynamicHeight(), styles.bodyWidth, styles.fadedText] }
             maxLength={ 100 }
-            onChangeText={ (text) => this.props.updateEntry(text) }
+            onChangeText={ (text) => this.props.updateEntry(text) } //input from user here!
             onFocus= { this.moveUpForKeyboardShow.bind(this) }
             onBlur= { this.moveDownForKeyboardHide.bind(this) }/>
         <View style={ [styles.bodyWidth, styles.footer] }>
-          <Icon style={ [styles.footerContent, styles.footerPadlock] } name="lock-open"/>
-          <Icon style={ [styles.footerContent, styles.footerArrow] } name="near-me"/>
-          <Text style={ [styles.footerContent, styles.footerText] }>{ this.props.location }</Text>
+          <Icon style={ [styles.footerContent, styles.footerPadlock] /*part of input box footer*/ } name="lock-open"/>
+          <Icon style={ [styles.footerContent, styles.footerArrow] /*part of input box footer*/} name="near-me"/>
+          <Text style={ [styles.footerContent, styles.footerText] }>{ this.props.location /*why doesn't this show?*/ }</Text>
         </View>
       </ScrollView>
-    )
+    );
   }
 }
